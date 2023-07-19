@@ -34,13 +34,13 @@ resource "aws_elasticache_cluster" "elasticache_cluster" {
 
 # Create subnet group
 resource "aws_elasticache_subnet_group" "elasticache_cluster_subnet_group" {
-  name       = "${local.prefix}-redis-subnet-group"
+  name       = "${local.prefix}-redis-${var.environment}-subnet-group"
   subnet_ids = var.aws_app_subnets
 }
 
 # Create Sucurity Group for Allow Accress Elasticache
 resource "aws_security_group" "redis_cluster_sg" {
-  name        = "elasticache-cluster-sg"
+  name        = "${local.prefix}-redis-${var.environment}-sg"
   description = "Security group for mq-broker with 6379 ports open within VPC"
   vpc_id      = var.vpc_id
 
@@ -61,7 +61,7 @@ resource "aws_security_group" "redis_cluster_sg" {
   }
 
   tags = merge(
-    { Name = "elasticache-cluster-sg" },
+    { Name = "${local.prefix}-redis-${var.environment}-sg" },
     local.common_tags
   )
 }

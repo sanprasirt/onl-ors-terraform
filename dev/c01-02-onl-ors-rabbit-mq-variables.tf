@@ -21,7 +21,7 @@ variable "mq_instance_types" {
   type        = map(string)
   default = {
     dev   = "mq.t3.micro"
-    stage = "mq.m5.large"
+    uat = "mq.m5.large"
     prod  = "mq.m5.xlarge"
   }
 }

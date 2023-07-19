@@ -139,7 +139,9 @@ module "alb_sg" {
   vpc_id      = var.vpc_id
 
   ingress_rules       = ["http-80-tcp"]
+  # ingress_rules       = ["https-443-tcp"] # Allow only https to connect to service
   ingress_cidr_blocks = ["0.0.0.0/0"]
+  # ingress_cidr_blocks = var.app_subnets_cidr_blocks # This is access only app private subnet
 
   egress_rules       = ["all-all"]
   egress_cidr_blocks = var.noneexpose_subnets_cidr_blocks
@@ -178,7 +180,21 @@ module "alb" {
       }
     },
   ]
-
+  # https_listeners = [
+  #   {
+  #     port               = 443
+  #     protocol           = "HTTPS"
+  #     certificate_arn    = "arn:aws:acm:ap-southeast-1:802791533053:certificate/acf3e7ec-a2a6-4030-bfc7-d13cbdc6bf84"
+  #     # target_group_index = 0
+  #     action_type = "fixed-response"
+  #     fixed_response = {
+  #       content_type = "text/plain"
+  #       message_body = "This path is not available"
+  #       status_code  = "200"
+  #     }
+  #   }
+  # ]
+  
   # HTTP Listener rules
   # http_tcp_listener_rules = [
   #   {

@@ -15,7 +15,7 @@ variable "cache_instance_types" {
   type        = map(string)
   default = {
     dev   = "cache.t4g.micro"
-    stage = "cache.r6g.large"
+    uat = "cache.r6g.large"
     prod  = "cache.r6g.xlarge"
   }
 }

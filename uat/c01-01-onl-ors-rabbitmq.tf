@@ -21,7 +21,7 @@ resource "aws_mq_broker" "rabbit_mq" {
 
 # Create Sucurity Group for Allow Accress MQ
 resource "aws_security_group" "rabbit_mq_sg" {
-  name        = "rabbitmq-sg"
+  name        = "rabbitmq-${var.environment}-sg"
   description = "Security group for mq-broker with 5671 ports open within VPC"
   vpc_id      = var.vpc_id
 
@@ -49,7 +49,7 @@ resource "aws_security_group" "rabbit_mq_sg" {
   }
 
   tags = merge(
-    { Name = "rabbitmq-sg" },
+    { Name = "rabbitmq-${var.environment}-sg" },
     local.common_tags
   )
 }
