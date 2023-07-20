@@ -3,19 +3,12 @@ variable "aws_region" {
   default     = "ap-southeast-1"
 }
 
-variable "create_codebuild" {
-  description = "Create codebuild"
+variable "create" {
+  description = "Detrmind whether to create codebuild or not"
   type        = bool
   default     = true
 }
-
-variable "codebuild" {
-  type    = list(string)
-  default = []
-}
-
-
-variable "environment" {
+variable "codebuild_environment" {
   type = map(string)
   default = {
     AWS_ACCOUNT_ID = "802791533053"

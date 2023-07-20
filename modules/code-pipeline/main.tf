@@ -1,9 +1,9 @@
 resource "aws_codebuild_project" "this" {
-  for_each    = var.create_codebuild ? toset(var.codebuild) : []
+  for_each    = var.create ? var.codebuild_environment : {}
   name        = "onl-ors-uat-codebuild"
   description = "onl-ors-uat-codebuild"
   # service_role       = "arn:aws:iam::802791533053:role/dvp-cicd-deployer-role"
-  service_role       = aws_iam_role.this.arn
+  service_role       = aws_iam_role.this[0].arn
   project_visibility = "PRIVATE"
   artifacts {
     type = "CODEPIPELINE"
@@ -37,6 +37,7 @@ resource "aws_codebuild_project" "this" {
 }
 
 data "aws_iam_policy_document" "assume_role" {
+  count = var.create ? 1 : 0
   statement {
     effect = "Allow"
 
@@ -50,11 +51,13 @@ data "aws_iam_policy_document" "assume_role" {
 }
 
 resource "aws_iam_role" "this" {
+  count = var.create ? 1 : 0
   name               = "onl-ors-codebuild-service-role-uat"
-  assume_role_policy = data.aws_iam_policy_document.assume_role.json
+  assume_role_policy = data.aws_iam_policy_document.assume_role[count.index].json
 }
 
 data "aws_iam_policy_document" "this" {
+  count = var.create ? 1 : 0
   statement {
     effect = "Allow"
 
@@ -109,9 +112,10 @@ data "aws_iam_policy_document" "this" {
 }
 
 resource "aws_iam_role_policy" "this" {
+  count = var.create ? 1 : 0
   name   = "onl-ors-codebuild-policy-uat"
-  role   = aws_iam_role.this.name
-  policy = data.aws_iam_policy_document.this.json
+  role   = aws_iam_role.this[count.index].name
+  policy = data.aws_iam_policy_document.this[count.index].json
 }
 
 
