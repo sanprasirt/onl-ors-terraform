@@ -56,17 +56,17 @@ variable "db_connection_string" {
   default     = "onl-ors-orsonl-stg.cd541tnsejm6.ap-southeast-1.rds.amazonaws.com:1521/ORSONL"
 }
 
-variable "db_username" {
-  description = "DB User name"
-  type        = string
-  default     = "ors2user"
-}
+# variable "db_username" {
+#   description = "DB User name"
+#   type        = string
+#   default     = "ors2user"
+# }
 
-variable "db_password" {
-  description = "DB Password"
-  type        = string
-  sensitive   = true
-}
+# variable "db_password" {
+#   description = "DB Password"
+#   type        = string
+#   sensitive   = true
+# }
 variable "repo_url" {
   description = "The url of ECR repository"
   type        = string
