@@ -15,8 +15,8 @@ variable "services_name" {
     webapp = {
       port          = 8080,
       variable_port = "8080",
-      cpu           = 256,
-      memory        = 512,
+      cpu           = 512,
+      memory        = 1024,
     },
     reserve = {
       port          = 3000,

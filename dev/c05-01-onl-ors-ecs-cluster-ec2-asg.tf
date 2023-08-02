@@ -163,10 +163,11 @@ module "alb" {
   vpc_id             = var.vpc_id
   subnets            = var.aws_app_subnets
   security_groups    = [module.alb_sg.security_group_id]
-  # access_logs = {
-  #   bucket = "${local.prefix}-alb-logs"
-  # }
-
+  access_logs = {
+    bucket = "${local.prefix}-alb-logs-${var.environment}"
+    prefix = "${local.prefix}-alb"
+    enabled = true
+  }
   http_tcp_listeners = [
     {
       port               = 80

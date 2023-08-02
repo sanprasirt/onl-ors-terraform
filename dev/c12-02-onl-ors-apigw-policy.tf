@@ -9,6 +9,11 @@ data "aws_iam_policy_document" "this" {
 
     actions   = ["execute-api:Invoke"]
     resources = ["${aws_api_gateway_rest_api.onl_ors_apigw_rest_api.execution_arn}/*"]
+    condition {
+      test     = "StringEquals"
+      variable = "aws:SourceVpce"
+      values   = ["vpce-0ff3201042e4c57ee"]
+    }
   }
 }
 resource "aws_api_gateway_rest_api_policy" "onl_ors_apigw_policy" {

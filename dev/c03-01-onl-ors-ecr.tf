@@ -1,20 +1,21 @@
 # aws_ecr_repository.onl-ors-reserve:
 
-locals {
-  ecr_repos = [
-    "onl-ors-reserve",
-    "onl-ors-receive",
-    "onl-ors-cancel",
-    "onl-ors-search",
-    "onl-ors-confirm",
-    "onl-ors-webapp",
-    "onl-ors-mq-consume",
-    "onl-ors-mq-consume-product",
-    "onl-ors-webmonitor",
-    "onl-ors-printscreport",
-    "onl-ors-screport"
-  ]
-}
+# locals {
+#   ecr_repos = [
+#     "${local.prefix}-reserve",
+#     "${local.prefix}-receive",
+#     "${local.prefix}-cancel",
+#     "${local.prefix}-search",
+#     "${local.prefix}-confirm",
+#     "${local.prefix}-webapp",
+#     "${local.prefix}-mq-consume",
+#     "${local.prefix}-mq-consume-product",
+#     "${local.prefix}-webmonitor",
+#     "${local.prefix}-printscreport",
+#     "${local.prefix}-screport"
+#   ]
+# }
+
 resource "aws_ecr_repository" "onl-ors-reserve" {
   image_tag_mutability = "MUTABLE"
   name                 = "${local.prefix}-reserve"
