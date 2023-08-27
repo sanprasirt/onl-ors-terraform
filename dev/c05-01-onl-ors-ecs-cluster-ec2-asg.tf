@@ -166,7 +166,7 @@ module "alb" {
   access_logs = {
     bucket = "${local.prefix}-alb-logs-${var.environment}"
     prefix = "${local.prefix}-alb"
-    enabled = true
+    enabled = false
   }
   http_tcp_listeners = [
     {
