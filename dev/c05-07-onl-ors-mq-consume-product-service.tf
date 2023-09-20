@@ -4,7 +4,7 @@ resource "aws_ecs_service" "onl_ors_mq_consume_product_service" {
   cluster                            = module.ecs_cluster.arn
   deployment_maximum_percent         = 200
   deployment_minimum_healthy_percent = 50
-  desired_count                      = 0 # assign number of task to run
+  desired_count                      = 1 # assign number of task to run
   enable_ecs_managed_tags            = true
   health_check_grace_period_seconds  = 0
   name                               = "${local.prefix}-mq-consume-product-service"
@@ -17,7 +17,7 @@ resource "aws_ecs_service" "onl_ors_mq_consume_product_service" {
   # Update for not conflic with aws pipeline
   # task_definition = "arn:aws:ecs:ap-southeast-1:802791533053:task-definition/onl-ors-mq-consumer-service:2"
   lifecycle {
-    ignore_changes = [desired_count, task_definition]
+    ignore_changes = [task_definition]
   }
   capacity_provider_strategy {
     base              = 1
