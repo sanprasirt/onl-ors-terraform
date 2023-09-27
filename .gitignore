@@ -5,6 +5,7 @@
 # Local .terraform directories
 **/.terraform/*
 **/templates/*
+/import/
 # .tfstate files
 *.tfstate
 *.tfstate.*
