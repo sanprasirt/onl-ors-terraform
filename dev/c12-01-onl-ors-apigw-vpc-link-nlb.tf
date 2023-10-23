@@ -91,6 +91,23 @@ resource "aws_vpc_endpoint" "onl_ors_vpc_endpoint" {
   )
 }
 
+# Domain Name
+# resource "aws_api_gateway_domain_name" "onl_ors_apigw_domain_name" {
+#   certificate_arn    = "arn:aws:acm:ap-southeast-1:802791533053:certificate/acf3e7ec-a2a6-4030-bfc7-d13cbdc6bf84"
+  
+#   # certificate_arn = "arn:aws:acm:ap-southeast-1:802791533053:certificate/acf3e7ec-a2a6-4030-bfc7-d13cbdc6bf84"
+#   domain_name     = "onl-ors-dev.cpall.co.th"
+#   endpoint_configuration {
+#     types = ["REGIONAL"]
+#   }
+# }
+
+# resource "aws_api_gateway_base_path_mapping" "onl_ors_apigw_base_path_mapping" {
+#   api_id      = aws_api_gateway_rest_api.onl_ors_apigw_rest_api.id
+#   stage_name  = aws_api_gateway_stage.onl_ors_apigw_stage.stage_name
+#   domain_name = aws_api_gateway_domain_name.onl_ors_apigw_domain_name.domain_name
+# }
+
 module "apigateway_sg" {
   source = "terraform-aws-modules/security-group/aws"
   version = "~> 4.0"
@@ -99,10 +116,10 @@ module "apigateway_sg" {
   description = "Security group for VPC Endpoint Call API"
   vpc_id = var.vpc_id
   ingress_cidr_blocks = ["0.0.0.0/0"]
-  ingress_rules = ["https-443-tcp"]
+  ingress_rules = ["https-443-tcp","http-80-tcp"]
   
   egress_cidr_blocks = ["0.0.0.0/0"]
-  egress_rules = ["https-443-tcp"]
+  egress_rules = ["all-all"]
 
   tags = local.common_tags
 }

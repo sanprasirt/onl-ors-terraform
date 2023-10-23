@@ -1,5 +1,6 @@
 resource "aws_lb_listener_rule" "onl_ors_webapp_rule" {
   listener_arn = module.alb.http_tcp_listener_arns[0]
+  # listener_arn = module.alb.https_listener_arns[0]
   priority     = 99
   action {
     type             = "forward"
@@ -16,6 +17,7 @@ resource "aws_lb_listener_rule" "onl_ors_webapp_rule" {
 resource "aws_lb_listener_rule" "onl_ors_reserve_rule" {
   #   for_each     = toset(["reserve", "search", "receive", "confirm", "cancel"])
   listener_arn = module.alb.http_tcp_listener_arns[0]
+  # listener_arn = module.alb.https_listener_arns[0]
   priority     = 100
   action {
     type             = "forward"
@@ -31,6 +33,7 @@ resource "aws_lb_listener_rule" "onl_ors_reserve_rule" {
 
 resource "aws_lb_listener_rule" "onl_ors_search_rule" {
   listener_arn = module.alb.http_tcp_listener_arns[0]
+  # listener_arn = module.alb.https_listener_arns[0]
   priority     = 101
   action {
     type             = "forward"
@@ -46,6 +49,7 @@ resource "aws_lb_listener_rule" "onl_ors_search_rule" {
 
 resource "aws_lb_listener_rule" "onl_ors_receive_rule" {
   listener_arn = module.alb.http_tcp_listener_arns[0]
+  # listener_arn = module.alb.https_listener_arns[0]
   priority     = 103
   action {
     type             = "forward"
@@ -61,6 +65,7 @@ resource "aws_lb_listener_rule" "onl_ors_receive_rule" {
 
 resource "aws_lb_listener_rule" "onl_ors_confirm_rule" {
   listener_arn = module.alb.http_tcp_listener_arns[0]
+  # listener_arn = module.alb.https_listener_arns[0]
   priority     = 102
   action {
     type             = "forward"
@@ -76,6 +81,7 @@ resource "aws_lb_listener_rule" "onl_ors_confirm_rule" {
 
 resource "aws_lb_listener_rule" "onl_ors_cancel_rule" {
   listener_arn = module.alb.http_tcp_listener_arns[0]
+  # listener_arn = module.alb.https_listener_arns[0]
   priority     = 104
   action {
     type             = "forward"
@@ -91,6 +97,7 @@ resource "aws_lb_listener_rule" "onl_ors_cancel_rule" {
 
 resource "aws_lb_listener_rule" "onl_ors_webmonitor_rule" {
   listener_arn = module.alb.http_tcp_listener_arns[0]
+  # listener_arn = module.alb.https_listener_arns[0]
   priority     = 105
   action {
     type             = "forward"
@@ -106,6 +113,7 @@ resource "aws_lb_listener_rule" "onl_ors_webmonitor_rule" {
 
 resource "aws_lb_listener_rule" "onl_ors_printscreport_rule" {
   listener_arn = module.alb.http_tcp_listener_arns[0]
+  # listener_arn = module.alb.https_listener_arns[0]
   priority     = 106
   action {
     type             = "forward"
@@ -121,6 +129,7 @@ resource "aws_lb_listener_rule" "onl_ors_printscreport_rule" {
 
 resource "aws_lb_listener_rule" "onl_ors_screport_rule" {
   listener_arn = module.alb.http_tcp_listener_arns[0]
+  # listener_arn = module.alb.https_listener_arns[0]
   priority     = 107
   action {
     type             = "forward"

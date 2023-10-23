@@ -14,7 +14,7 @@ resource "aws_lb" "onl_ors_nlb" {
 
 resource "aws_lb_listener" "onl_ors_nlb_listener" {
   load_balancer_arn = aws_lb.onl_ors_nlb.arn
-  port              = "80"
+  port              = "80" # 80 is the default port for HTTP
   protocol          = "TCP"
 #   certificate_arn   = "arn:aws:iam::187416307283:server-certificate/test_cert_rab3wuqwgja25ct3n4jdj2tzu4"
 #   alpn_policy       = "HTTP2Preferred"

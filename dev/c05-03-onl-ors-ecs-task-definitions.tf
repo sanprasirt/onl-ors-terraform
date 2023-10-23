@@ -50,7 +50,7 @@ resource "aws_ecs_task_definition" "onl_ors_tasks" {
         },
         {
           "name" : "REDIS_HOST",
-          "value" : aws_elasticache_cluster.elasticache_cluster.cache_nodes.0.address
+          "value" : "${aws_elasticache_cluster.elasticache_cluster.cache_nodes.0.address}:"
         },
         {
           "name" : "REDIS_USERNAME",
