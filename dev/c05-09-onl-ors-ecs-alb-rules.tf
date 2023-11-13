@@ -142,3 +142,19 @@ resource "aws_lb_listener_rule" "onl_ors_screport_rule" {
   }
   depends_on = [module.alb.http_tcp_listener_arns]
 }
+
+resource "aws_lb_listener_rule" "onl_ors_hqsystem_rule" {
+  listener_arn = module.alb.http_tcp_listener_arns[0]
+  # listener_arn = module.alb.https_listener_arns[0]
+  priority     = 108
+  action {
+    type             = "forward"
+    target_group_arn = module.alb.target_group_arns[9]
+  }
+  condition {
+    path_pattern {
+      values = ["/ORS2_HQ_System/*","/scriptui/*"]
+    }
+  }
+  depends_on = [module.alb.http_tcp_listener_arns]
+}

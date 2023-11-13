@@ -46,6 +46,10 @@ locals {
       container_port = 8080,
       target         = 8,
     },
+    hq-system = {
+      container_port = 8080,
+      target         = 9,
+    },
   }
   
   target_groups = [
@@ -163,6 +167,20 @@ locals {
     },
     {
       name             = "${local.prefix}-screport-tg-${var.environment}"
+      backend_protocol = "HTTP"
+      backend_port     = 8080
+      target_type      = "ip"
+      health_check = {
+        path                = "/"
+        interval            = 30
+        timeout             = 5
+        healthy_threshold   = 5
+        unhealthy_threshold = 2
+        matcher             = "200"
+      }
+    },
+    {
+      name             = "${local.prefix}-hqsystem-tg-${var.environment}"
       backend_protocol = "HTTP"
       backend_port     = 8080
       target_type      = "ip"

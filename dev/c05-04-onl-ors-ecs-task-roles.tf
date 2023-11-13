@@ -1,6 +1,6 @@
 # Create Role execution tasks
 resource "aws_iam_role" "ecs_task_execution_role" {
-  for_each = var.services_name
+  for_each = var.services_name # This is a map variable from ecs-variables.tf
   name     = "${each.key}TaskExecutionRole"
 
   assume_role_policy = <<EOF

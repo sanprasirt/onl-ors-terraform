@@ -1,16 +1,16 @@
 module "onl_ors_batch" {
-  source = "terraform-aws-modules/batch/aws"
+  source  = "terraform-aws-modules/batch/aws"
   version = "2.0.1"
 
-  instance_iam_role_name = "${local.prefix}-batch-role-${var.environment}"
-  instance_iam_role_path = "/batch/"
-  instance_iam_role_description = "IAM role for AWS Batch instances"
+  instance_iam_role_name                = "${local.prefix}-batch-role-${var.environment}"
+  instance_iam_role_path                = "/batch/"
+  instance_iam_role_description         = "IAM role for AWS Batch instances"
   instance_iam_role_additional_policies = ["arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"]
   instance_iam_role_tags = {
     ModuleCreatedRole = "Yes"
   }
-  service_iam_role_name = "${local.prefix}-batch-service-role-${var.environment}"
-  service_iam_role_path = "/batch/"
+  service_iam_role_name        = "${local.prefix}-batch-service-role-${var.environment}"
+  service_iam_role_path        = "/batch/"
   service_iam_role_description = "IAM role for AWS Batch service"
   service_iam_role_tags = {
     ModuleCreatedRole = "Yes"
@@ -18,23 +18,23 @@ module "onl_ors_batch" {
 
   compute_environments = {
     ec2 = {
-        name = "${local.prefix}-ecs-batch-cluster-${var.environment}"
-        # name_prefix = "${local.prefix}-batch-${var.environment}"
-        type = "MANAGED"
-        compute_resources = {
-            type = "EC2"
-            instance_types = ["optimal"]
-            min_vcpus = 0
-            max_vcpus = 4
-            desired_vcpus = 0
-            security_group_ids = [module.batch_security_group.security_group_id]
-            subnets = var.aws_nonexpose_subnets
-            tags = merge(
-                { Name = "${local.prefix}-ecs-batch-${var.environment}"
-                Type = "EC2" },
-                local.common_tags
-            )
-        }
+      name = "${local.prefix}-ecs-batch-cluster-${var.environment}"
+      # name_prefix = "${local.prefix}-batch-${var.environment}"
+      type = "MANAGED"
+      compute_resources = {
+        type               = "EC2"
+        instance_types     = ["optimal"]
+        min_vcpus          = 0
+        max_vcpus          = 4
+        desired_vcpus      = 0
+        security_group_ids = [module.batch_security_group.security_group_id]
+        subnets            = var.aws_nonexpose_subnets
+        tags = merge(
+          { Name = "${local.prefix}-ecs-batch-${var.environment}"
+          Type = "EC2" },
+          local.common_tags
+        )
+      }
     }
   }
   # Create first jobs definition
@@ -42,7 +42,7 @@ module "onl_ors_batch" {
   #   onl_ors_updateStoreFC_job = {
   #     name = "${local.prefix}-batch-job-definition-${var.environment}"
   #     propagate_tags = true
-      
+
   #     container_properties = jsonencode({
   #       comamannd = "java -jar ors-updateStoreFC.jar"
   #       image = "${var.repo_url}/onl-ors-updatestorefc:latest"
@@ -88,10 +88,10 @@ module "onl_ors_batch" {
 }
 
 resource "aws_cloudwatch_log_group" "this" {
-    name              = "${local.prefix}-batch-log-group"
-    retention_in_days = 7
-    tags = merge(
-        { Name = "${local.prefix}-batch-log-group" },
-        local.common_tags
-    )
+  name              = "${local.prefix}-batch-log-group-${var.environment}"
+  retention_in_days = 7
+  tags = merge(
+    { Name = "${local.prefix}-batch-log-group-${var.environment}" },
+    local.common_tags
+  )
 }

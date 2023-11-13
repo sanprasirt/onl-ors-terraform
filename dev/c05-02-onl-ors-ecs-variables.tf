@@ -78,5 +78,11 @@ variable "services_name" {
       cpu           = 256,
       memory        = 512,
     },
+    hq-system = {
+      port          = 8080,
+      variable_port = "8080",
+      cpu           = 1024,
+      memory        = 1024,
+    },
   }
 }

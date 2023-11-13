@@ -1,5 +1,5 @@
 resource "aws_ecs_task_definition" "onl_ors_tasks" {
-  for_each                 = var.services_name
+  for_each                 = var.services_name # This is a map variable from ecs-variables.tf
   family                   = "${local.prefix}-${each.key}-service"
   execution_role_arn       = aws_iam_role.ecs_task_execution_role[each.key].arn
   memory                   = each.value.memory
